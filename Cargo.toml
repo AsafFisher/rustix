@@ -41,9 +41,9 @@ libc = { version = "0.2.118", features = ["extra_traits"], optional = true }
 
 # On all other Unix-family platforms, and under Miri, we always use the libc
 # backend, so enable its dependencies unconditionally.
-[target.'cfg(any(rustix_use_libc, miri, not(all(target_os = "linux", any(target_arch = "x86", all(target_arch = "x86_64", not(target_pointer_width = "32")), target_arch = "arm", target_arch = "aarch64", target_arch = "powerpc64", target_arch = "riscv64", target_arch = "mips", target_arch = "mips64")))))'.dependencies]
-errno = { version = "0.2.8", default-features = false }
-libc = { version = "0.2.118", features = ["extra_traits"] }
+#[target.'cfg(any(rustix_use_libc, miri, not(all(target_os = "linux", any(target_arch = "x86", all(target_arch = "x86_64", not(target_pointer_width = "32")), target_arch = "arm", target_arch = "aarch64", target_arch = "powerpc64", target_arch = "riscv64", target_arch = "mips", target_arch = "mips64")))))'.dependencies]
+#errno = { version = "0.2.8", default-features = false }
+#libc = { version = "0.2.118", features = ["extra_traits"] }
 
 [target.'cfg(all(any(target_os = "android", target_os = "linux"), any(rustix_use_libc, miri, not(all(target_os = "linux", any(target_arch = "x86", all(target_arch = "x86_64", not(target_pointer_width = "32")), target_arch = "arm", target_arch = "aarch64", target_arch = "powerpc64", target_arch = "riscv64", target_arch = "mips", target_arch = "mips64"))))))'.dependencies]
 # Some syscalls do not have libc wrappers, such as in `io_uring`. For these,
@@ -51,10 +51,10 @@ libc = { version = "0.2.118", features = ["extra_traits"] }
 linux-raw-sys = { version = "0.0.46", default-features = false, optional = true, features = ["general", "no_std"] }
 
 # For the libc backend on Windows, use the Winsock2 API in winapi.
-[target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3.9", features = ["ws2ipdef", "ws2tcpip"] }
-[target.'cfg(all(windows, not(target_vendor = "uwp")))'.dependencies]
-winapi = { version = "0.3.9", features = ["handleapi"] }
+#[target.'cfg(windows)'.dependencies]
+#winapi = { version = "0.3.9", features = ["ws2ipdef", "ws2tcpip"] }
+#[target.'cfg(all(windows, not(target_vendor = "uwp")))'.dependencies]
+#winapi = { version = "0.3.9", features = ["handleapi"] }
 
 [dev-dependencies]
 tempfile = "3.2.0"
